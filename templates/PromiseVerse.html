@@ -1,0 +1,100 @@
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>
+
+        </title>
+
+        <style>
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+
+    <body style="background-color: rgb(86,205,153);">
+        <img src="{{url_for('static', filename='/images/2022.gif')}}" class="center img-responsive" style='width:90%'>
+        
+        <div class="container-fluid">
+            <div style="padding:20px"></div>
+            
+            <h1 class="col-12" style="font-family: 'Brush Script MT', cursive; font-size: 50px; color:blue">
+                Promise Verses are:
+            </h1>
+            <div style="padding:10px"></div>
+            
+            <div>
+                {% for st in key %}
+                    <p>{{st}}</p>
+                {% endfor %}
+            </div>
+
+            <div>
+                {% for st in val %}
+                    <p>{{st}}</p>
+                {% endfor %}
+            </div>
+
+            <script>
+                var down = document.getElementById("GFG_DOWN");
+                /// Writing for cookies
+                {% block content %}
+                    {% if key != '' %}
+                        var list0 = {{ key | tojson }};
+                        var list1 = {{ val | tojson }};
+
+                        for (let index = 0; index < list0.length; index++) {
+                            setCookie(list0[index], list1[index], 1);                    
+                        }
+                    {% endif %}
+                {% endblock content %}
+
+
+                function setCookie(cname,cvalue,exdays) {
+                    const d = new Date();
+                    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                    let expires = "expires=" + d.toUTCString();
+                    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+                }
+
+                function getCookie(cname) {
+                    let name = cname + "=";
+                    let decodedCookie = decodeURIComponent(document.cookie);
+                    let ca = decodedCookie.split(';');
+                    for(let i = 0; i < ca.length; i++) {
+                        let c = ca[i];
+                        while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                        }
+                        if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                        }
+                    }
+                    return "";
+                }
+
+                function checkCookie() {
+                    let user = getCookie("Per1");
+                    window.location.href = "{{url_for('promise_verse')}}";
+                    if (user != "") {
+                        //window.location.href = "{{url_for('promise_verse')}}";
+                    } else {
+                        // user = prompt("Please enter your name:","");
+                        // if (user != "" && user != null) {
+                        // setCookie("username", user, 30);
+                        // }
+
+                    }
+                }
+                window.onload=checkCookie();
+            </script>       
+        </div>
+    </body>
+</html>

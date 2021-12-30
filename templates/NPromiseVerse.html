@@ -1,0 +1,114 @@
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>
+
+        </title>
+
+        <style>
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .ansbox{
+                background-color:rgb(255, 255, 255);
+                border-radius: 8px;
+                
+            }
+        </style>
+    </head>
+
+    <body style="background-color: rgb(86,205,153);">
+        <img src="{{url_for('static', filename='/images/2022.gif')}}" class="center img-responsive" style='width:90%'>
+        
+        <div class="container-fluid">
+            <div style="padding:20px"></div>
+            
+            <h1 class="col-12" style="font-family: 'Brush Script MT', cursive; font-size: 50px; color:blue">
+                Promise Verses are:
+            </h1>
+            <div style="padding:10px"></div>
+
+        </div>
+        <div class="container col-12" style="width: 100%;">
+            <div id='kili'>
+
+            </div>
+        </div> 
+        <script>
+            var down = document.getElementById("GFG_DOWN");
+            /// Writing for cookies
+            var strL = listCookies();
+            var strList = strL.split("\n");
+            function listCookies() {
+                var theCookies = document.cookie.split(';');
+                var aString = '';
+                for (var i = 1 ; i <= theCookies.length; i++) {
+                    if(i==theCookies.length)
+                        aString +=theCookies[i-1];
+                    else
+                        aString +=theCookies[i-1] + "\n";
+                }
+                return aString;
+            }
+
+            var toAdd = document.getElementById("kili");
+            for(var i=0; i < strList.length; i++){
+                var fix = strList[i].split("=");
+                if(fix[0] != "Per1"){
+                    var newDiv = document.createElement('p');
+                    newDiv.id = 'r'+i;
+                    newDiv.className = 'ansbox col-12';
+                    newDiv.style.padding = 10;
+                    newDiv.innerHTML = '<b>'+'Name: '+fix[0]+'</b>'+'<br>'+'<i>'+''+ fix[1]+'</i>';
+                    toAdd.appendChild(newDiv);
+                }
+            }
+
+            document.appendChild(toAdd);
+
+            function setCookie(cname,cvalue,exdays) {
+                const d = new Date();
+                d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                let expires = "expires=" + d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+
+            function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+                for(let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            function checkCookie() {
+                let user = getCookie("Per1");
+                if (user != "") {
+                    //window.location.href = "{{url_for('promise_verse')}}";
+                } else {
+                    // user = prompt("Please enter your name:","");
+                    // if (user != "" && user != null) {
+                    // setCookie("username", user, 30);
+                    // }
+
+                }
+            }
+            window.onload=checkCookie();
+        </script>     
+    </body>
+</html>
