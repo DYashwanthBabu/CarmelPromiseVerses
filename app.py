@@ -19,14 +19,16 @@ def promise_verse():
         filename = request.form
         namesList = []
         valuesList = []
+        counter = 0
         df = pd.read_csv("final.csv")
         for i in filename.keys():
+            counter +=1
             ranNum = random.randint(0,171)
             li = df.loc[ranNum].tolist()
             verse = li[0] + ": "+li[1] 
             namesList.append(filename[i])
             valuesList.append(verse)
-        return render_template('PromiseVerse.html', key=namesList, val=valuesList)
+        return render_template('PromiseVerse.html', key=namesList, val=valuesList, count =counter)
 
     return render_template('NPromiseVerse.html')
 

@@ -16,6 +16,11 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            .ansbox{
+                background-color:rgb(255, 255, 255);
+                border-radius: 8px;
+                padding: 10px;
+            }
         </style>
     </head>
 
@@ -31,15 +36,11 @@
             <div style="padding:10px"></div>
             
             <div>
-                {% for st in key %}
-                    <p>{{st}}</p>
+                {% for i in range(0, count) %}
+                    <p class="ansbox"> <b>Name: {{key[i]}}</b>
+                        <br><i>{{val[i]}}</i></p>
                 {% endfor %}
-            </div>
-
-            <div>
-                {% for st in val %}
-                    <p>{{st}}</p>
-                {% endfor %}
+                
             </div>
 
             <script>
@@ -82,7 +83,7 @@
 
                 function checkCookie() {
                     let user = getCookie("Per1");
-                    window.location.href = "{{url_for('promise_verse')}}";
+                    //window.location.href = "{{url_for('promise_verse')}}";
                     if (user != "") {
                         //window.location.href = "{{url_for('promise_verse')}}";
                     } else {
