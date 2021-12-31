@@ -20,7 +20,7 @@ def promise_verse():
         namesList = []
         valuesList = []
         counter = 0
-        df = pd.read_csv("let.csv")
+        df = pd.read_csv("PromiseVerse.csv")
         for i in filename.keys():
             counter +=1
             ranNum = random.randint(0,171)
